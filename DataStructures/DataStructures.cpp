@@ -7,7 +7,7 @@
 #include <windows.h>
 
 void initQueue(Queue* q, unsigned int size) {
-	q->arr = new int[size];
+	q->arr = new unsigned int[size];
 	q->maxsize = size;
 	q->size = 0;
 }
