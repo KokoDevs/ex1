@@ -1,12 +1,49 @@
 // DataStructures.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#include "Queue.h"
 #include <iostream>
+#include <sstream>
+#include <windows.h>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+void initQueue(Queue* q, unsigned int size) {
+	q->arr = new int[size];
+	q->maxsize = size;
+	q->size = 0;
 }
+
+void cleanQueue(Queue* q) {
+	delete[] q->arr;
+	q->arr = NULL;
+}
+
+void enqueue(Queue* q, unsigned int value) {
+	if (q->maxsize > q->size) {
+		int insert = q->size;
+		q->arr[insert] = value;
+		q->size++;
+	}
+}
+
+int dequeue(Queue* q) {
+	if (q->size == 0) return -1;
+
+	int saved = q->arr[0];
+	for (int i = 0; i < q->size -1; i++)
+		q->arr[i] = q->arr[i + 1];
+
+	q->size--;
+	return saved;
+}
+
+bool isEmpty(Queue* q) {
+	return q->size == 0;
+}
+
+bool isFull(Queue* q) {
+	return q->size == q->maxsize;
+}
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
